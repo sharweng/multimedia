@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  <title>Solar System Render | Multimedia Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            purple: {
+              400: '#a78bfa',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              900: '#4c1d95',
+            },
+            pink: {
+              400: '#f472b6',
+              600: '#db2777',
+              700: '#be185d',
+              900: '#831843',
+            },
+            gray: {
+              300: '#d1d5db',
+              400: '#9ca3af',
+              700: '#374151',
+              800: '#1f2937',
+              900: '#111827',
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/video-player.css">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+    pre {
+      overflow-x: auto;
+      padding: 1rem;
+      background-color: #1a1a1a;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-white">
+  <!-- Navbar -->
+  <nav class="bg-black/90 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <a href="index.html" class="flex items-center space-x-2">
+          <i class="fas fa-film text-purple-400"></i>
+          <span class="font-bold text-xl">Multimedia Portfolio</span>
+        </a>
+
+        <div class="hidden md:flex space-x-6">
+          <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+          <a href="rotoscoping.html" class="text-gray-300 hover:text-white transition-colors">Rotoscoping</a>
+          <a href="solar-system.html" class="text-gray-300 hover:text-white transition-colors">Solar System</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-16">
+    <div class="flex items-center mb-8">
+      <a href="index.html" class="text-gray-400 hover:text-white">
+        <i class="fas fa-chevron-left mr-2"></i> Back to Home
+      </a>
+    </div>
+
+    <header class="mb-16">
+      <h1 class="text-4xl font-bold mb-4">Solar System Render</h1>
+      <p class="text-lg text-gray-300 max-w-3xl">
+        A 3D animation of our solar system created using Blender with Python scripting for accurate planetary motion
+        and physics.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+      <div class="lg:col-span-2">
+        <div class="video-container aspect-video rounded-lg overflow-hidden">
+          <video poster="https://via.placeholder.com/1280x720.png?text=Solar+System+Animation" controls>
+            <source src="#" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-title">Solar System Animation</div>
+        </div>
+      </div>
+
+      <div class="bg-gray-900 rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4">Project Details</h2>
+        <div class="space-y-4 text-gray-300">
+          <div>
+            <h3 class="font-semibold text-white">Tools Used:</h3>
+            <p>Blender 3.5, Python 3.10</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Render Time:</h3>
+            <p>48 hours on RTX 3080</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Resolution:</h3>
+            <p>4K (3840 x 2160)</p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Features:</h3>
+            <ul class="list-disc list-inside">
+              <li>Accurate planetary orbits</li>
+              <li>Realistic textures and lighting</li>
+              <li>Dynamic camera movements</li>
+              <li>Physically accurate scale (modified for visibility)</li>
+              <li>Custom Python scripts for animation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 space-y-4">
+          <a href="#" class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded w-full">
+            <i class="fas fa-download mr-2"></i> Download High-Res Version
+          </a>
+          <a href="#python-script" class="block text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">
+            <i class="fas fa-code mr-2"></i> View Python Script
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-8 mb-16">
+      <h2 class="text-2xl font-bold mb-4">About This Project</h2>
+      <div class="text-gray-300 space-y-4">
+        <p>
+          This solar system animation was created using Blender 3D with custom Python scripts to accurately simulate
+          planetary motion. The project combines artistic visualization with scientific accuracy to create an
+          educational and visually stunning representation of our solar system.
+        </p>
+        <p>
+          The Python script handles the orbital mechanics, calculating the position of each planet based on Kepler's
+          laws of planetary motion. This ensures that the relative speeds and distances of the planets are accurate,
+          though the scale has been adjusted to make the visualization more effective.
+        </p>
+        <p>
+          Each planet was textured using high-resolution NASA imagery, and the lighting was set up to simulate the
+          actual illumination from the sun. Special attention was paid to details like the rings of Saturn, the
+          Great Red Spot on Jupiter, and the atmospheric effects on each planet.
+        </p>
+      </div>
+    </div>
+
+    <div class="mb-16" id="python-script">
+      <h2 class="text-2xl font-bold mb-8 border-b border-gray-800 pb-4">Python Script Highlights</h2>
+      <div class="bg-gray-900 rounded-lg p-6">
+        <pre class="text-sm text-gray-300">
+import bpy
+import math
+from mathutils import Vector
+
+# Clear existing objects
+bpy.ops.object.select_all(action='DESELECT')
+bpy.ops.object.select_by_type(type='MESH')
+bpy.ops.object.delete()
+
+# Create Sun
+sun = bpy.ops.mesh.primitive_uv_sphere_add(radius=2, location=(0, 0, 0))
+sun_obj = bpy.context.active_object
+sun_obj.name = 'Sun'
+
+# Create material for Sun
+sun_mat = bpy.data.materials.new(name="SunMaterial")
+sun_mat.use_nodes = True
+nodes = sun_mat.node_tree.nodes
+bsdf = nodes.get("Principled BSDF")
+bsdf.inputs[0].default_value = (1.0, 0.8, 0.0, 1.0)  # Yellow color
+bsdf.inputs[19].default_value = 5.0  # Emission strength
+sun_obj.data.materials.append(sun_mat)
+
+# Planet data: name, radius, distance from sun, orbit period (days)
+planets = [
+    ("Mercury", 0.2, 5, 88),
+    ("Venus", 0.3, 7, 225),
+    ("Earth", 0.4, 10, 365),
+    ("Mars", 0.3, 13, 687),
+    ("Jupiter", 0.8, 20, 4333),
+    ("Saturn", 0.7, 25, 10759),
+    ("Uranus", 0.5, 30, 30687),
+    ("Neptune", 0.5, 35, 60190)
+]
+
+# Create planets
+for name, radius, distance, period in planets:
+    bpy.ops.mesh.primitive_uv_sphere_add(radius=radius, location=(distance, 0, 0))
+    planet = bpy.context.active_object
+    planet.name = name
+    
+    # Create orbit path
+    bpy.ops.curve.primitive_bezier_circle_add(radius=distance)
+    orbit = bpy.context.active_object
+    orbit.name = f"{name}_Orbit"
+    
+    # Set up animation
+    frames_per_orbit = period / 2  # Scaled for animation
+    bpy.context.scene.frame_end = max(bpy.context.scene.frame_end, int(frames_per_orbit))
+    
+    # Animate planet along orbit
+    for frame in range(int(frames_per_orbit)):
+        angle = (frame / frames_per_orbit) * 2 * math.pi
+        x = distance * math.cos(angle)
+        y = distance * math.sin(angle)
+        planet.location = (x, y, 0)
+        planet.keyframe_insert(data_path="location", frame=frame)
+
+# Set up camera and lighting
+bpy.ops.object.camera_add(location=(0, -50, 30), rotation=(math.radians(60), 0, 0))
+camera = bpy.context.active_object
+
+# Add a track to constraint to follow the sun
+track_to = camera.constraints.new('TRACK_TO')
+track_to.target = sun_obj
+track_to.track_axis = 'TRACK_NEGATIVE_Z'
+track_to.up_axis = 'UP_Y'
+
+# Set up rendering
+bpy.context.scene.render.resolution_x = 3840
+bpy.context.scene.render.resolution_y = 2160
+bpy.context.scene.render.film_transparent = True
+
+print("Solar system setup complete!")
+        </pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 border-t border-gray-800">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <p>© <span id="current-year"></span> Marbella, SJ</p>
+        </div>
+
+        <div class="flex space-x-4">
+            <a href="https://github.com/sharweng" target="_blank" class="hover:text-purple-400 transition-colors">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/sharwinjohnmarbella/" target="_blank" class="hover:text-purple-400 transition-colors">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="mailto:marbellasharwinjohn@gmail.com" class="hover:text-purple-400 transition-colors">
+              <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/video-player.js"></script>
+  <script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

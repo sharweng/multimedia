@@ -1,0 +1,75 @@
+.video-container {
+    position: relative;
+    background-color: #000;
+    overflow: hidden;
+  }
+  
+  .video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .video-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+    color: white;
+    font-weight: 500;
+    z-index: 10;
+  }
+  
+  .video-container:hover .video-controls {
+    opacity: 1;
+  }
+  
+  .video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .video-progress {
+    flex-grow: 1;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    margin: 0 1rem;
+    border-radius: 2px;
+  }
+  
+  .video-progress-filled {
+    background-color: #a78bfa;
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+  }
+  
+  .video-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  
+  .video-button:hover {
+    color: #a78bfa;
+  }
+  
+  .video-time {
+    color: white;
+    font-size: 0.875rem;
+    margin-left: 1rem;
+  }
+  

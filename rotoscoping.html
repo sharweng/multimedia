@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  <title>Rotoscoping Progress | Multimedia Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            purple: {
+              400: '#a78bfa',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              900: '#4c1d95',
+            },
+            pink: {
+              400: '#f472b6',
+              600: '#db2777',
+              700: '#be185d',
+              900: '#831843',
+            },
+            gray: {
+              300: '#d1d5db',
+              400: '#9ca3af',
+              700: '#374151',
+              800: '#1f2937',
+              900: '#111827',
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/video-player.css">
+  <style>
+    body {
+      background-color: black;
+      color: white;
+    }
+    .step-number {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+    .step-connector {
+      position: absolute;
+      left: 20px;
+      top: 40px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #a78bfa, #f472b6);
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
+    .process-image {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-black text-white">
+  <!-- Navbar -->
+  <nav class="bg-black/90 backdrop-blur-sm border-b border-gray-800 sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex justify-between items-center">
+        <a href="index.html" class="flex items-center space-x-2">
+          <i class="fas fa-film text-purple-400"></i>
+          <span class="font-bold text-xl">Multimedia Portfolio</span>
+        </a>
+
+        <div class="hidden md:flex space-x-6">
+          <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+          <a href="rotoscoping.html" class="text-gray-300 hover:text-white transition-colors">Rotoscoping</a>
+          <a href="solar-system.html" class="text-gray-300 hover:text-white transition-colors">Solar System</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-16">
+    <div class="flex items-center mb-8">
+      <a href="index.html" class="text-gray-400 hover:text-white">
+        <i class="fas fa-chevron-left mr-2"></i> Back to Home
+      </a>
+    </div>
+
+    <header class="mb-16">
+      <h1 class="text-4xl font-bold mb-4">Rotoscoping Progress</h1>
+      <p class="text-lg text-gray-300 max-w-3xl">
+        Follow my journey through the art of rotoscoping from week 3 to week 13. Each video shows the progression of
+        skills and techniques learned throughout the process.
+      </p>
+    </header>
+
+    <!-- Rotoscoping Steps Section -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-8 border-b border-gray-800 pb-4">The Rotoscoping Process</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+        <!-- Step 1 -->
+        <div class="relative pl-16">
+          <div class="step-number bg-purple-600 text-white absolute left-0 top-0">1</div>
+          <div class="step-connector"></div>
+          <h3 class="text-xl font-bold mb-3">Video Reference Preparation</h3>
+          <p class="text-gray-300 mb-4">
+            The first step involves selecting and preparing the video reference. This includes choosing the right footage, and 
+            adjusting frame rates.
+          </p>
+          <div class="rounded-lg overflow-hidden mb-4">
+            <img src="/images/Step1.png" alt="Video Reference Preparation" class="process-image">
+          </div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="relative pl-16">
+          <div class="step-number bg-purple-600 text-white absolute left-0 top-0">2</div>
+          <div class="step-connector"></div>
+          <h3 class="text-xl font-bold mb-3">Rotoscoping Each Frame</h3>
+          <p class="text-gray-300 mb-4">
+            Next, individual frames are rotoscoped from the video. The background is replaced by solid green color for easier replacement of background later on.
+          </p>
+          <div class="rounded-lg overflow-hidden mb-4">
+            <img src="/images/Step2.png" alt="Frame Extraction" class="process-image">
+          </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="relative pl-16">
+          <div class="step-number bg-purple-600 text-white absolute left-0 top-0">3</div>
+          <div class="step-connector"></div>
+          <h3 class="text-xl font-bold mb-3">Chroma Key</h3>
+          <p class="text-gray-300 mb-4">
+            Removed the green background using chroma key.
+          </p>
+          <div class="rounded-lg overflow-hidden mb-4">
+            <img src="/images/Step3.png" alt="Initial Outlines" class="process-image">
+          </div>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="relative pl-16">
+          <div class="step-number bg-pink-600 text-white absolute left-0 top-0">4</div>
+          <div class="step-connector"></div>
+          <h3 class="text-xl font-bold mb-3">Tricolor</h3>
+          <p class="text-gray-300 mb-4">
+            Made the rotoscoped subject tricolor, which is light, medium, and dark shades. This is to easily apply the three shades of pencil later.
+          </p>
+          <div class="rounded-lg overflow-hidden mb-4">
+            <img src="/images/Step4.png" alt="Detailed Tracing" class="process-image">
+          </div>
+        </div>
+        
+        <!-- Step 5 -->
+        <div class="relative pl-16">
+          <div class="step-number bg-pink-600 text-white absolute left-0 top-0">5</div>
+          <div class="step-connector"></div>
+          <h3 class="text-xl font-bold mb-3">Pencil Effect</h3>
+          <p class="text-gray-300 mb-4">
+            Applied multiple effects in AE so that the tricolored frame to replace the three shades of color from solid color to pencil.
+          </p>
+          <div class="rounded-lg overflow-hidden mb-4">
+            <img src="/images/Step5.png" alt="Coloring Process" class="process-image">
+          </div>
+        </div>
+        
+        <!-- Step 6 -->
+        <div class="relative pl-16">
+          <div class="step-number bg-pink-600 text-white absolute left-0 top-0">6</div>
+          <div class="step-connector"></div>
+          <h3 class="text-xl font-bold mb-3">Final Edits</h3>
+          <p class="text-gray-300 mb-4">
+            The final step involves adding the original video for reference and adding my name and section.
+          </p>
+          <div class="rounded-lg overflow-hidden mb-4">
+            <img src="/images/Step6.png" alt="Final Effects" class="process-image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-8 border-b border-gray-800 pb-4">Final Rotoscope Animation</h2>
+      <div class="bg-gray-900 rounded-lg overflow-hidden">
+        <div class="video-container max-w-4xl mx-auto">
+          <div class="video-wrapper">
+            <!-- Replace with your YouTube embed for the final video -->
+            <iframe 
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+              title="Final Rotoscope Animation" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-title p-2">Complete Rotoscope Animation</div>
+        </div>
+        <div class="p-6 max-w-4xl mx-auto">
+          <h3 class="text-2xl font-bold mb-4">Complete Rotoscope Animation</h3>
+          <p class="text-gray-300 mb-6">
+            The culmination of 11 weeks of work, this final animation showcases all the techniques and skills
+            developed throughout the rotoscoping journey. From basic outlines to complex movements, color, and
+            special effects, this piece represents the complete learning process.
+          </p>
+          <div class="flex justify-center">
+            <a href="solar-system.html" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+              Solar System Project <i class="fas fa-chevron-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold mb-8 border-b border-gray-800 pb-4">Weekly Progress</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="weekly-progress">
+        <!-- Weekly progress cards will be inserted here by JavaScript -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-gray-400 border-t border-gray-800">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <p>© <span id="current-year"></span> Marbella, SJ</p>
+        </div>
+
+        <div class="flex space-x-4">
+          <a href="https://github.com/sharweng" target="_blank" class="hover:text-purple-400 transition-colors">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/sharwinjohnmarbella/" target="_blank" class="hover:text-purple-400 transition-colors">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="mailto:marbellasharwinjohn@gmail.com" class="hover:text-purple-400 transition-colors">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/video-player.js"></script>
+  <script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Weekly progress data with video links
+    const weeks = [
+      { 
+        week: 3, 
+        title: "Initial Outlines",
+        videoId: "tapWVntiMoI", // YouTube video ID
+        isYouTube: true
+      },
+      { 
+        week: 4, 
+        title: "Basic Movement",
+        videoUrl: "videos/week4-rotoscope.mp4", // Local video file
+        isYouTube: false
+      },
+      { 
+        week: 5, 
+        title: "Refining Edges",
+        videoUrl: "videos/week5-rotoscope.mp4",
+        isYouTube: false
+      },
+      { 
+        week: 6, 
+        title: "Adding Details",
+        videoUrl: "videos/week6-rotoscope.mp4",
+        isYouTube: false
+      },
+      { 
+        week: 7, 
+        title: "Color Introduction",
+        videoUrl: "videos/week7-rotoscope.mp4",
+        isYouTube: false
+      },
+      { 
+        week: 8, 
+        title: "Shading Techniques",
+        videoUrl: "videos/week8-rotoscope.mp4",
+        isYouTube: false
+      },
+      { 
+        week: 9, 
+        title: "Motion Smoothing",
+        videoUrl: "videos/week9-rotoscope.mp4",
+        isYouTube: false
+      },
+      { 
+        week: 10, 
+        title: "Background Elements",
+        videoUrl: "videos/week10-rotoscope.mp4",
+        isYouTube: false
+      },
+      { 
+        week: 11, 
+        title: "Special Effects",
+        videoUrl: "videos/week11-rotoscope.mp4",
+        isYouTube: false
+      },
+      { 
+        week: 12, 
+        title: "Audio Synchronization",
+        videoUrl: "videos/week12-rotoscope.mp4",
+        isYouTube: false
+      },
+      { 
+        week: 13, 
+        title: "Final Touches",
+        videoUrl: "videos/week13-rotoscope.mp4",
+        isYouTube: false
+      }
+    ];
+
+    // Generate weekly progress cards
+    const weeklyProgressContainer = document.getElementById('weekly-progress');
+    
+    weeks.forEach(week => {
+      const card = document.createElement('div');
+      card.className = 'bg-gray-900 border-gray-800 rounded-lg overflow-hidden';
+      
+      let videoContent;
+      if (week.isYouTube) {
+        // YouTube embed
+        videoContent = `
+          <div class="video-wrapper">
+            <iframe 
+              src="https://www.youtube.com/embed/${week.videoId}" 
+              title="Week ${week.week}: ${week.title}" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-title p-2">Week ${week.week} Progress</div>
+        `;
+      } else {
+        // Local video
+        videoContent = `
+          <video poster="https://via.placeholder.com/640x360.png?text=Week+${week.week}" controls>
+            <source src="${week.videoUrl}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-title">Week ${week.week} Progress</div>
+        `;
+      }
+      
+      card.innerHTML = `
+        <div class="video-container aspect-video">
+          ${videoContent}
+        </div>
+        <div class="p-4">
+          <h3 class="text-xl font-semibold mb-2">Week ${week.week} Progress</h3>
+        </div>
+      `;
+      
+      weeklyProgressContainer.appendChild(card);
+    });
+  </script>
+</body>
+</html>
