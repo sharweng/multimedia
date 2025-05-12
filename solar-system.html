@@ -149,7 +149,7 @@
         </div>
 
         <div class="mt-8 space-y-4">
-          <a href="https://drive.google.com/file/d/1XDYXBmjocRzWP-3mRg8JPcCcjG08UdKc/view" target="_blank" class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded w-full">
+          <a href="https://drive.google.com/file/d/1ZQhRK5wBWWa-Kgf5A1OQoIMrwpjsbvEs/view?usp=sharing" target="_blank" class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded w-full">
             <i class="fas fa-download mr-2"></i> Download Project
           </a>
           <a href="#python-script" class="block text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">
@@ -257,7 +257,7 @@ rotation_periods = {
     "Saturn": 10.7,
     "Uranus": -17.24,   # retrograde
     "Neptune": 16.11,
-    "Moon": 655.7       # 27.3 days
+    "Moon": 655.7       # 27.3 days, but will not rotate in this animation
 }
 
 # Axial tilts for all planets (degrees)
@@ -280,7 +280,7 @@ years_to_animate = orbital_periods["Neptune"]  # Animation ends when Neptune com
 total_frames = int(years_to_animate * 365.25 * fps / 365.25)  # 1 frame = 1 day
 
 # Helper: create material with image texture
-def create_texture_material(name, image_path, is_ring=False):
+def Screate_texture_material(name, image_path, is_ring=False):
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
     nodes = mat.node_tree.nodes
@@ -311,11 +311,11 @@ def create_texture_material(name, image_path, is_ring=False):
     return mat
 
 # Helper: create a sphere with texture
-def create_planet(name, size, texture_path):
+def Jcreate_planet(name, size, texture_path):
     bpy.ops.mesh.primitive_uv_sphere_add(segments=64, ring_count=32, radius=size, location=(0,0,0))
     obj = bpy.context.active_object
     obj.name = name
-    mat = create_texture_material(name + "_Mat", texture_path)
+    mat = Screate_texture_material(name + "_Mat", texture_path)
     if obj.data.materials:
         obj.data.materials[0] = mat
     else:
@@ -323,7 +323,7 @@ def create_planet(name, size, texture_path):
     return obj
 
 # Helper: create Saturn's ring
-def create_saturn_ring(parent, inner_radius, outer_radius, texture_path):
+def Mcreate_saturn_ring(parent, inner_radius, outer_radius, texture_path):
     bpy.ops.mesh.primitive_torus_add(
         major_radius=(inner_radius+outer_radius)/2,
         minor_radius=(outer_radius-inner_radius)/2,
@@ -334,7 +334,7 @@ def create_saturn_ring(parent, inner_radius, outer_radius, texture_path):
     )
     ring = bpy.context.active_object
     ring.name = "SaturnRing"
-    mat = create_texture_material("SaturnRing_Mat", texture_path, is_ring=True)
+    mat = Screate_texture_material("SaturnRing_Mat", texture_path, is_ring=True)
     if ring.data.materials:
         ring.data.materials[0] = mat
     else:
@@ -345,7 +345,7 @@ def create_saturn_ring(parent, inner_radius, outer_radius, texture_path):
     return ring
 
 # Create Sun
-sun = create_planet("Sun", planet_sizes["Sun"], textures["Sun"])
+sun = Jcreate_planet("Sun", planet_sizes["Sun"], textures["Sun"])
 # Apply Sun's axial tilt
 sun.rotation_euler = (math.radians(axial_tilts["Sun"]), 0, 0)
 
@@ -380,14 +380,14 @@ for planet in ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus
     rot_empty.rotation_euler = (math.radians(axial_tilts[planet]), 0, 0)
     
     # Create planet mesh
-    obj = create_planet(planet, planet_sizes[planet], textures[planet])
+    obj = Jcreate_planet(planet, planet_sizes[planet], textures[planet])
     obj.location = (0, 0, 0)  # Planet is at the center of its rotation empty
     obj.parent = rot_empty
     planets[planet] = obj
     
     # Saturn's ring
     if planet == "Saturn":
-        saturn_ring_obj = create_saturn_ring(obj, planet_sizes["Saturn"]*1.2, planet_sizes["Saturn"]*2.2, textures["SaturnRing"])
+        saturn_ring_obj = Mcreate_saturn_ring(obj, planet_sizes["Saturn"]*1.2, planet_sizes["Saturn"]*2.2, textures["SaturnRing"])
 
 # Create Earth's moon
 # Empty for moon's revolution around Earth
@@ -405,7 +405,7 @@ moon_rot_empty.parent = moon_empty
 moon_rot_empty.rotation_euler = (math.radians(axial_tilts["Moon"]), 0, 0)
 
 # Create the Moon
-moon = create_planet("Moon", planet_sizes["Moon"], textures["Moon"])
+moon = Jcreate_planet("Moon", planet_sizes["Moon"], textures["Moon"])
 moon.location = (0, 0, 0)
 moon.parent = moon_rot_empty
 
