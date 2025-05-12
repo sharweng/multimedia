@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/multimedia/images/favicon.png">
   <title>Solar System Render | Multimedia Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -49,6 +49,20 @@
       background-color: #1a1a1a;
       border-radius: 0.5rem;
     }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+    }
   </style>
 </head>
 <body class="min-h-screen bg-black text-white">
@@ -89,11 +103,16 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
       <div class="lg:col-span-2">
         <div class="video-container aspect-video rounded-lg overflow-hidden">
-          <video poster="https://via.placeholder.com/1280x720.png?text=Solar+System+Animation" controls>
-            <source src="#" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <div class="video-title">Solar System Animation</div>
+          <div class="video-wrapper">
+            <!-- Replace YOUR_VIDEO_ID with your actual YouTube video ID -->
+            <iframe 
+              src="https://www.youtube.com/embed/tECItb5DrP0 " 
+              title="Solar System Animation" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-title p-2">Solar System Animation</div>
         </div>
       </div>
 
@@ -102,31 +121,35 @@
         <div class="space-y-4 text-gray-300">
           <div>
             <h3 class="font-semibold text-white">Tools Used:</h3>
-            <p>Blender 3.5, Python 3.10</p>
+            <p>Blender 4.4.1, Python 3.11</p>
           </div>
           <div>
             <h3 class="font-semibold text-white">Render Time:</h3>
-            <p>48 hours on RTX 3080</p>
+            <p>18 hours and 53 minutes on RTX 3050 Ti Laptop</p>
           </div>
           <div>
             <h3 class="font-semibold text-white">Resolution:</h3>
-            <p>4K (3840 x 2160)</p>
+            <p>1080p (1920 x 1080)</p>
           </div>
           <div>
             <h3 class="font-semibold text-white">Features:</h3>
             <ul class="list-disc list-inside">
-              <li>Accurate planetary orbits</li>
-              <li>Realistic textures and lighting</li>
-              <li>Dynamic camera movements</li>
-              <li>Physically accurate scale (modified for visibility)</li>
-              <li>Custom Python scripts for animation</li>
+              <li>The Sun, the planets (as well as the moon), rotates on their axis and revolves around the sun (except for the moon which revolves around the earth)</li>
+              <li>The axis tilt, rotation time, and time of revolution around the sun are accurate or very close to real astronomical value.</li>
+              <li>Custom Python script for modeling and animation</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Notes:</h3>
+            <ul class="list-disc list-inside">
+              <li>Sizes of the heavenly bodies and their orbit distance are not accurate for visibility</li>
             </ul>
           </div>
         </div>
 
         <div class="mt-8 space-y-4">
-          <a href="#" class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded w-full">
-            <i class="fas fa-download mr-2"></i> Download High-Res Version
+          <a href="https://drive.google.com/file/d/1XDYXBmjocRzWP-3mRg8JPcCcjG08UdKc/view" class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded w-full">
+            <i class="fas fa-download mr-2"></i> Download Project
           </a>
           <a href="#python-script" class="block text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">
             <i class="fas fa-code mr-2"></i> View Python Script
@@ -139,19 +162,17 @@
       <h2 class="text-2xl font-bold mb-4">About This Project</h2>
       <div class="text-gray-300 space-y-4">
         <p>
-          This solar system animation was created using Blender 3D with custom Python scripts to accurately simulate
+          This solar system animation was created using Blender 3D with custom Python script to accurately simulate
           planetary motion. The project combines artistic visualization with scientific accuracy to create an
           educational and visually stunning representation of our solar system.
         </p>
         <p>
-          The Python script handles the orbital mechanics, calculating the position of each planet based on Kepler's
-          laws of planetary motion. This ensures that the relative speeds and distances of the planets are accurate,
+          The Python script handles the orbital mechanics, the position of each planet based on real astronomical data. This ensures that the relative speeds and distances of the planets are accurate,
           though the scale has been adjusted to make the visualization more effective.
         </p>
         <p>
-          Each planet was textured using high-resolution NASA imagery, and the lighting was set up to simulate the
-          actual illumination from the sun. Special attention was paid to details like the rings of Saturn, the
-          Great Red Spot on Jupiter, and the atmospheric effects on each planet.
+          Each planet was textured using high-resolution images from Solar System Scope. Special attention was paid to details like the rings of Saturn, the
+          Great Red Spot on Jupiter, and the distance between two planets to make sure they don't collide.
         </p>
       </div>
     </div>
@@ -162,78 +183,386 @@
         <pre class="text-sm text-gray-300">
 import bpy
 import math
-from mathutils import Vector
+import mathutils
 
 # Clear existing objects
-bpy.ops.object.select_all(action='DESELECT')
-bpy.ops.object.select_by_type(type='MESH')
-bpy.ops.object.delete()
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete(use_global=False)
+
+# Texture paths
+textures = {
+    "Sun": "//SolarTextures/sun.jpg",
+    "Mercury": "//SolarTextures/mercury.jpg",
+    "Venus": "//SolarTextures/venus_surface.jpg",
+    "Earth": "//SolarTextures/earth_day_map.jpg",
+    "Moon": "//SolarTextures/moon.jpg",
+    "Mars": "//SolarTextures/mars.jpg",
+    "Jupiter": "//SolarTextures/jupiter.jpg",
+    "Saturn": "//SolarTextures/saturn.jpg",
+    "Uranus": "//SolarTextures/uranus.jpg",
+    "Neptune": "//SolarTextures/neptune.jpg",
+    "SaturnRing": "//SolarTextures/saturn_ring.png"
+}
+
+
+# Orbital radii (arbitrary Blender units, visually spaced)
+orbital_radii = {
+    "Mercury": 4,
+    "Venus": 6,
+    "Earth": 8,
+    "Mars": 10,
+    "Jupiter": 13,
+    "Saturn": 18,
+    "Uranus": 22,
+    "Neptune": 26,
+    "Moon": 1.2  # relative to Earth
+}
+
+# Planet sizes (arbitrary, visually scaled)
+planet_sizes = {
+    "Sun": 2.0,
+    "Mercury": 0.18,
+    "Venus": 0.45,
+    "Earth": 0.47,
+    "Moon": 0.13,
+    "Mars": 0.25,
+    "Jupiter": 1.0,
+    "Saturn": 0.85,
+    "Uranus": 0.6,
+    "Neptune": 0.58
+}
+
+# Orbital periods in Earth years (for revolution speed)
+orbital_periods = {
+    "Mercury": 0.241,
+    "Venus": 0.615,
+    "Earth": 1.0,
+    "Mars": 1.881,
+    "Jupiter": 11.86,
+    "Saturn": 29.46,
+    "Uranus": 84.01,
+    "Neptune": 164.8,
+    "Moon": 0.0748  # 27.3 days / 365.25
+}
+
+# Rotation periods in hours (for self-rotation speed, negative for retrograde)
+rotation_periods = {
+    "Sun": 609.12,      # ~25.38 days
+    "Mercury": 1407.6,  # 58.6 days
+    "Venus": -5832.5,   # -243 days (retrograde)
+    "Earth": 23.93,
+    "Mars": 24.62,
+    "Jupiter": 9.93,
+    "Saturn": 10.7,
+    "Uranus": -17.24,   # retrograde
+    "Neptune": 16.11,
+    "Moon": 655.7       # 27.3 days
+}
+
+# Axial tilts for all planets (degrees)
+axial_tilts = {
+    "Sun": 7.25,        # Adding Sun's axial tilt
+    "Mercury": 0.03,
+    "Venus": 177.4,
+    "Earth": 23.44,
+    "Mars": 25.19,
+    "Jupiter": 3.13,
+    "Saturn": 26.73,
+    "Uranus": 97.77,
+    "Neptune": 28.32,
+    "Moon": 6.68        # Moon's axial tilt
+}
+
+# Animation settings
+fps = 24
+years_to_animate = orbital_periods["Neptune"]  # Animation ends when Neptune completes one revolution
+total_frames = int(years_to_animate * 365.25 * fps / 365.25)  # 1 frame = 1 day
+
+# Helper: create material with image texture
+def create_texture_material(name, image_path, is_ring=False):
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    nodes = mat.node_tree.nodes
+    links = mat.node_tree.links
+    for n in nodes:
+        nodes.remove(n)
+    output = nodes.new(type='ShaderNodeOutputMaterial')
+    if is_ring:
+        shader = nodes.new(type='ShaderNodeBsdfTransparent')
+        mix = nodes.new(type='ShaderNodeMixShader')
+        diffuse = nodes.new(type='ShaderNodeBsdfDiffuse')
+        tex = nodes.new(type='ShaderNodeTexImage')
+        tex.image = bpy.data.images.load(image_path)
+        alpha = nodes.new(type='ShaderNodeTexImage')
+        alpha.image = tex.image
+        links.new(tex.outputs['Color'], diffuse.inputs['Color'])
+        links.new(diffuse.outputs['BSDF'], mix.inputs[2])
+        links.new(shader.outputs['BSDF'], mix.inputs[1])
+        links.new(alpha.outputs['Alpha'], mix.inputs['Fac'])
+        links.new(mix.outputs['Shader'], output.inputs['Surface'])
+        mat.blend_method = 'BLEND'
+    else:
+        diffuse = nodes.new(type='ShaderNodeBsdfDiffuse')
+        tex = nodes.new(type='ShaderNodeTexImage')
+        tex.image = bpy.data.images.load(image_path)
+        links.new(tex.outputs['Color'], diffuse.inputs['Color'])
+        links.new(diffuse.outputs['BSDF'], output.inputs['Surface'])
+    return mat
+
+# Helper: create a sphere with texture
+def create_planet(name, size, texture_path):
+    bpy.ops.mesh.primitive_uv_sphere_add(segments=64, ring_count=32, radius=size, location=(0,0,0))
+    obj = bpy.context.active_object
+    obj.name = name
+    mat = create_texture_material(name + "_Mat", texture_path)
+    if obj.data.materials:
+        obj.data.materials[0] = mat
+    else:
+        obj.data.materials.append(mat)
+    return obj
+
+# Helper: create Saturn's ring
+def create_saturn_ring(parent, inner_radius, outer_radius, texture_path):
+    bpy.ops.mesh.primitive_torus_add(
+        major_radius=(inner_radius+outer_radius)/2,
+        minor_radius=(outer_radius-inner_radius)/2,
+        abso_major_rad=1.0,
+        abso_minor_rad=0.5,
+        location=(0,0,0),
+        rotation=(0, 0, 0)
+    )
+    ring = bpy.context.active_object
+    ring.name = "SaturnRing"
+    mat = create_texture_material("SaturnRing_Mat", texture_path, is_ring=True)
+    if ring.data.materials:
+        ring.data.materials[0] = mat
+    else:
+        ring.data.materials.append(mat)
+    ring.parent = parent
+    ring.location = (0,0,0)
+    ring.scale = (1.0, 1.0, 0.05)
+    return ring
 
 # Create Sun
-sun = bpy.ops.mesh.primitive_uv_sphere_add(radius=2, location=(0, 0, 0))
-sun_obj = bpy.context.active_object
-sun_obj.name = 'Sun'
+sun = create_planet("Sun", planet_sizes["Sun"], textures["Sun"])
+# Apply Sun's axial tilt
+sun.rotation_euler = (math.radians(axial_tilts["Sun"]), 0, 0)
 
-# Create material for Sun
-sun_mat = bpy.data.materials.new(name="SunMaterial")
-sun_mat.use_nodes = True
-nodes = sun_mat.node_tree.nodes
-bsdf = nodes.get("Principled BSDF")
-bsdf.inputs[0].default_value = (1.0, 0.8, 0.0, 1.0)  # Yellow color
-bsdf.inputs[19].default_value = 5.0  # Emission strength
-sun_obj.data.materials.append(sun_mat)
+# Add light at the sun's position
+bpy.ops.object.light_add(type='POINT', location=(0,0,0))
+light = bpy.context.active_object
+light.data.energy = 5000
+light.parent = sun
 
-# Planet data: name, radius, distance from sun, orbit period (days)
-planets = [
-    ("Mercury", 0.2, 5, 88),
-    ("Venus", 0.3, 7, 225),
-    ("Earth", 0.4, 10, 365),
-    ("Mars", 0.3, 13, 687),
-    ("Jupiter", 0.8, 20, 4333),
-    ("Saturn", 0.7, 25, 10759),
-    ("Uranus", 0.5, 30, 30687),
-    ("Neptune", 0.5, 35, 60190)
-]
+# Store planet objects and their empty parents for revolution
+planets = {}
+empties = {}
+rotation_empties = {}  # New empties for proper axial rotation
+saturn_ring_obj = None
 
-# Create planets
-for name, radius, distance, period in planets:
-    bpy.ops.mesh.primitive_uv_sphere_add(radius=radius, location=(distance, 0, 0))
-    planet = bpy.context.active_object
-    planet.name = name
+# Create planets and their revolution empties
+for planet in ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]:
+    # Create empty at sun's location for revolution
+    bpy.ops.object.empty_add(type='PLAIN_AXES', location=(0,0,0))
+    empty = bpy.context.active_object
+    empty.name = f"{planet}_Orbit_Empty"
+    empties[planet] = empty
     
-    # Create orbit path
-    bpy.ops.curve.primitive_bezier_circle_add(radius=distance)
-    orbit = bpy.context.active_object
-    orbit.name = f"{name}_Orbit"
+    # Create a rotation empty for proper axial rotation
+    bpy.ops.object.empty_add(type='PLAIN_AXES', location=(orbital_radii[planet], 0, 0))
+    rot_empty = bpy.context.active_object
+    rot_empty.name = f"{planet}_Rotation_Empty"
+    rot_empty.parent = empty
+    rotation_empties[planet] = rot_empty
     
-    # Set up animation
-    frames_per_orbit = period / 2  # Scaled for animation
-    bpy.context.scene.frame_end = max(bpy.context.scene.frame_end, int(frames_per_orbit))
+    # Apply axial tilt to the rotation empty
+    rot_empty.rotation_euler = (math.radians(axial_tilts[planet]), 0, 0)
     
-    # Animate planet along orbit
-    for frame in range(int(frames_per_orbit)):
-        angle = (frame / frames_per_orbit) * 2 * math.pi
-        x = distance * math.cos(angle)
-        y = distance * math.sin(angle)
-        planet.location = (x, y, 0)
-        planet.keyframe_insert(data_path="location", frame=frame)
+    # Create planet mesh
+    obj = create_planet(planet, planet_sizes[planet], textures[planet])
+    obj.location = (0, 0, 0)  # Planet is at the center of its rotation empty
+    obj.parent = rot_empty
+    planets[planet] = obj
+    
+    # Saturn's ring
+    if planet == "Saturn":
+        saturn_ring_obj = create_saturn_ring(obj, planet_sizes["Saturn"]*1.2, planet_sizes["Saturn"]*2.2, textures["SaturnRing"])
 
-# Set up camera and lighting
-bpy.ops.object.camera_add(location=(0, -50, 30), rotation=(math.radians(60), 0, 0))
-camera = bpy.context.active_object
+# Create Earth's moon
+# Empty for moon's revolution around Earth
+bpy.ops.object.empty_add(type='PLAIN_AXES', location=(0,0,0))
+moon_empty = bpy.context.active_object
+moon_empty.name = "Moon_Orbit_Empty"
+moon_empty.parent = rotation_empties["Earth"]  # Parent to Earth's rotation empty
+moon_empty.location = (0,0,0)
 
-# Add a track to constraint to follow the sun
-track_to = camera.constraints.new('TRACK_TO')
-track_to.target = sun_obj
-track_to.track_axis = 'TRACK_NEGATIVE_Z'
-track_to.up_axis = 'UP_Y'
+# Create a rotation empty for the Moon
+bpy.ops.object.empty_add(type='PLAIN_AXES', location=(orbital_radii["Moon"], 0, 0))
+moon_rot_empty = bpy.context.active_object
+moon_rot_empty.name = "Moon_Rotation_Empty"
+moon_rot_empty.parent = moon_empty
+moon_rot_empty.rotation_euler = (math.radians(axial_tilts["Moon"]), 0, 0)
 
-# Set up rendering
-bpy.context.scene.render.resolution_x = 3840
-bpy.context.scene.render.resolution_y = 2160
+# Create the Moon
+moon = create_planet("Moon", planet_sizes["Moon"], textures["Moon"])
+moon.location = (0, 0, 0)
+moon.parent = moon_rot_empty
+
+# Set camera to top-down view
+# Calculate the farthest planet's distance (Neptune)
+farthest_distance = orbital_radii["Neptune"]
+
+# Position camera directly above the solar system
+camera_height = farthest_distance * 1.5  # Increased height for better view
+
+# Create and position the camera for top-down view - FIXED CAMERA ORIENTATION
+bpy.ops.object.camera_add(location=(0, 0, camera_height))
+cam = bpy.context.active_object
+cam.name = "Solar_System_Camera"
+bpy.context.scene.camera = cam
+
+# Set camera to look directly down at the solar system
+# In Blender, pointing down means rotating 180 degrees around X axis
+cam.rotation_euler = (math.radians(180), 0, 0)
+
+# Adjust camera settings for a wider field of view
+cam.data.type = 'PERSP'
+cam.data.lens = 14  # Even wider angle lens (in mm) for top-down view
+cam.data.clip_end = 1000  # Ensure far planets are visible
+
+# Add a tracking constraint to ensure camera always points at the center
+track_to = cam.constraints.new(type='TRACK_TO')
+track_to.target = sun  # Track to the Sun (center of solar system)
+track_to.track_axis = 'TRACK_NEGATIVE_Z'  # Point camera's negative Z-axis (lens) at target
+track_to.up_axis = 'UP_Y'  # Keep camera's Y-axis pointing up
+
+# Add a second light from above for better visibility in top-down view
+bpy.ops.object.light_add(type='SUN', location=(0, 0, camera_height * 0.8))
+top_light = bpy.context.active_object
+top_light.name = "Top_Light"
+top_light.data.energy = 3.0  # Increased energy
+top_light.data.angle = math.radians(5)  # Narrow beam for directional light
+
+# Animation: set keyframes for revolution and rotation
+for planet in ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]:
+    # Animate revolution around the sun
+    empty = empties[planet]
+    period = orbital_periods[planet]
+    revolutions = years_to_animate / period
+    end_rot = math.radians(360) * revolutions
+    
+    empty.rotation_euler[2] = 0
+    empty.keyframe_insert(data_path="rotation_euler", frame=1, index=2)
+    empty.rotation_euler[2] = end_rot
+    empty.keyframe_insert(data_path="rotation_euler", frame=total_frames, index=2)
+    
+    # Animate self-rotation around the planet's own axis
+    rot_period = rotation_periods[planet]
+    if rot_period != 0:
+        # Number of rotations during the animation
+        n_rot = (years_to_animate * 365.25 * 24) / abs(rot_period)
+        rot_dir = 1 if rot_period > 0 else -1
+        
+        # Apply rotation to the planet object around its local Z axis
+        obj = planets[planet]
+        obj.rotation_euler[2] = 0
+        obj.keyframe_insert(data_path="rotation_euler", frame=1, index=2)
+        obj.rotation_euler[2] = rot_dir * math.radians(360) * n_rot
+        obj.keyframe_insert(data_path="rotation_euler", frame=total_frames, index=2)
+
+# Sun self-rotation
+sun_rot_period = rotation_periods["Sun"]
+n_rot = (years_to_animate * 365.25 * 24) / sun_rot_period
+sun.rotation_euler[2] = 0
+sun.keyframe_insert(data_path="rotation_euler", frame=1, index=2)
+sun.rotation_euler[2] = math.radians(360) * n_rot
+sun.keyframe_insert(data_path="rotation_euler", frame=total_frames, index=2)
+
+# Moon revolution
+moon_empty.rotation_euler[2] = 0
+moon_empty.keyframe_insert(data_path="rotation_euler", frame=1, index=2)
+moon_revolutions = years_to_animate / orbital_periods["Moon"]
+moon_empty.rotation_euler[2] = math.radians(360) * moon_revolutions
+moon_empty.keyframe_insert(data_path="rotation_euler", frame=total_frames, index=2)
+
+# Moon rotation
+moon_rot_period = rotation_periods["Moon"]
+moon_n_rot = (years_to_animate * 365.25 * 24) / moon_rot_period
+moon.rotation_euler[2] = 0
+moon.keyframe_insert(data_path="rotation_euler", frame=1, index=2)
+moon.rotation_euler[2] = math.radians(360) * moon_n_rot
+moon.keyframe_insert(data_path="rotation_euler", frame=total_frames, index=2)
+
+# Set animation length
+bpy.context.scene.frame_start = 1
+bpy.context.scene.frame_end = total_frames
+
+# Set up transparent background for rendering
 bpy.context.scene.render.film_transparent = True
 
-print("Solar system setup complete!")
+# Set up world background to be transparent
+bpy.context.scene.world.use_nodes = True
+world_nodes = bpy.context.scene.world.node_tree.nodes
+world_links = bpy.context.scene.world.node_tree.links
+
+# Clear existing nodes
+for node in world_nodes:
+    world_nodes.remove(node)
+
+# Create new nodes for transparent background
+world_output = world_nodes.new(type='ShaderNodeOutputWorld')
+background = world_nodes.new(type='ShaderNodeBackground')
+background.inputs[0].default_value = (0, 0, 0, 0)  # RGBA all zeros for transparency
+background.inputs[1].default_value = 0  # No strength
+
+# Connect nodes
+world_links.new(background.outputs[0], world_output.inputs['Surface'])
+
+# Add orbital path visualization (optional)
+for planet in ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]:
+    radius = orbital_radii[planet]
+    
+    # Create a circle to represent the orbital path
+    bpy.ops.curve.primitive_bezier_circle_add(radius=radius, location=(0, 0, 0))
+    orbit_path = bpy.context.active_object
+    orbit_path.name = f"{planet}_Orbit_Path"
+    
+    # Create a material for the orbit path
+    orbit_mat = bpy.data.materials.new(f"{planet}_Orbit_Mat")
+    orbit_mat.use_nodes = True
+    nodes = orbit_mat.node_tree.nodes
+    links = orbit_mat.node_tree.links
+    
+    # Clear default nodes and create new ones
+    for n in nodes:
+        nodes.remove(n)
+        
+    # Create emission shader for orbit path
+    output = nodes.new(type='ShaderNodeOutputMaterial')
+    emission = nodes.new(type='ShaderNodeEmission')
+    emission.inputs[0].default_value = (0.8, 0.8, 0.8, 1)  # Light gray color
+    emission.inputs[1].default_value = 0.2  # Low emission strength
+    
+    # Connect nodes
+    links.new(emission.outputs[0], output.inputs['Surface'])
+    
+    # Apply material to the orbit path
+    if orbit_path.data.materials:
+        orbit_path.data.materials[0] = orbit_mat
+    else:
+        orbit_path.data.materials.append(orbit_mat)
+    
+    # Make the orbit path thinner
+    orbit_path.data.bevel_depth = 0.01
+    
+    # Set orbit path to be slightly below the planets for better visibility in top-down view
+    orbit_path.location.z = -0.05
+
+# Set up render settings for transparency
+bpy.context.scene.render.image_settings.file_format = 'PNG'
+bpy.context.scene.render.image_settings.color_mode = 'RGBA'  # Make sure alpha channel is included
+
+print("Solar system animation setup complete with transparent background for rendering.")
         </pre>
       </div>
     </div>
