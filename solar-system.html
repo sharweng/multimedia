@@ -101,20 +101,24 @@
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-      <div class="lg:col-span-2">
-        <div class="video-container aspect-video rounded-lg overflow-hidden">
-          <div class="video-wrapper">
-            <!-- Replace YOUR_VIDEO_ID with your actual YouTube video ID -->
-            <iframe 
-              src="https://www.youtube.com/embed/tECItb5DrP0 " 
-              title="Solar System Animation" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-            </iframe>
+      <div class="lg:col-span-2 flex flex-col justify-between">
+          <div class="video-container aspect-video rounded-lg overflow-hidden">
+              <div class="video-wrapper">
+                  <!-- Replace YOUR_VIDEO_ID with your actual YouTube video ID -->
+                  <iframe 
+                    src="https://www.youtube.com/embed/tECItb5DrP0" 
+                    title="Solar System Animation" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                  </iframe>
+              </div>
+              <div class="video-title p-2">Solar System Animation</div>
           </div>
-          <div class="video-title p-2">Solar System Animation</div>
-        </div>
+          <a href="rotoscoping.html" class="mt-3 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded self-center">
+            <i class="fas fa-chevron-left ml-2"></i> Rotoscoping Project
+          </a>
       </div>
+
 
       <div class="bg-gray-900 rounded-lg p-6">
         <h2 class="text-2xl font-bold mb-4">Project Details</h2>
@@ -155,6 +159,9 @@
           <a href="#python-script" class="block text-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full">
             <i class="fas fa-code mr-2"></i> View Python Script
           </a>
+          <!-- <a href="rotoscoping.html"  class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded w-full">
+            <i class="fas fa-chevron-left ml-2"></i> Rotoscope Project 
+          </a> -->
         </div>
       </div>
     </div>
