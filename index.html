@@ -42,10 +42,106 @@
       background-color: black;
       color: white;
     }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1f2937;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #6d28d9;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7c3aed;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
     .gradient-text {
-      background: linear-gradient(to right, #a78bfa, #f472b6);
+      background: linear-gradient(135deg, #a78bfa 0%, #f472b6 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .project-card {
+      background: rgba(17, 24, 39, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(75, 85, 99, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(167, 139, 250, 0.2);
+      border-color: rgba(167, 139, 250, 0.5);
+    }
+
+    .hero-section {
+      background: radial-gradient(ellipse at center, rgba(109, 40, 217, 0.1) 0%, transparent 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(167, 139, 250, 0.05) 50%, transparent 70%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .floating-icon {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .btn-gradient {
+      background: linear-gradient(45deg, #7c3aed, #db2777);
+      transition: all 0.3s ease;
+    }
+
+    .btn-gradient:hover {
+      background: linear-gradient(45deg, #6d28d9, #be185d);
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(167, 139, 250, 0.3);
+    }
+
+    .about-section {
+      background: linear-gradient(135deg, rgba(109, 40, 217, 0.1) 0%, rgba(219, 39, 119, 0.1) 100%);
+      position: relative;
+    }
+
+    .about-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="%23a78bfa" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="%23f472b6" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+      opacity: 0.3;
     }
   </style>
 </head>
@@ -55,12 +151,12 @@
     <div class="container mx-auto px-4 py-4">
       <div class="flex justify-between items-center">
         <a href="index.html" class="flex items-center space-x-2">
-          <i class="fas fa-film text-purple-400"></i>
+          <i class="fas fa-film text-purple-400 floating-icon"></i>
           <span class="font-bold text-xl">Shar's Multimedia Portfolio</span>
         </a>
 
         <div class="hidden md:flex space-x-6">
-          <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+          <a href="index.html" class="text-white font-semibold border-b-2 border-purple-400 pb-1">Home</a>
           <a href="rotoscoping.html" class="text-gray-300 hover:text-white transition-colors">Rotoscoping</a>
           <a href="solar-system.html" class="text-gray-300 hover:text-white transition-colors">Solar System</a>
         </div>
@@ -70,49 +166,151 @@
 
   <!-- Main Content -->
   <div class="container mx-auto px-4 py-16">
-    <header class="mb-16 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold mb-4 gradient-text">
-        Shar's Multimedia Portfolio
-      </h1>
-      <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-        Showcasing my journey in rotoscoping and 3D rendering
-      </p>
-    </header>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-      <div class="bg-gray-900 rounded-lg p-8 hover:bg-gray-800 transition-colors">
-        <i class="fas fa-film text-purple-400 text-3xl mb-4"></i>
-        <h2 class="text-2xl font-bold mb-2">Rotoscoping Journey</h2>
-        <p class="text-gray-300 mb-6">
-          Follow my progress from week 3 to week 13, culminating in a final rotoscoped animation.
+    <!-- Hero Section -->
+    <div class="hero-section relative py-20 mb-20 rounded-2xl">
+      <header class="text-center relative z-10">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text">
+          Shar's Multimedia Portfolio
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Showcasing my journey in rotoscoping and 3D rendering through innovative digital art and animation
         </p>
-        <a href="rotoscoping.html" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
-          View Progress <i class="fas fa-chevron-right ml-2"></i>
-        </a>
-      </div>
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="rotoscoping.html" class="btn-gradient text-white font-bold py-3 px-8 rounded-lg">
+            <i class="fas fa-play mr-2"></i>View My Work
+          </a>
+          <a href="#projects" class="bg-black/30 border border-purple-400/30 text-white font-bold py-3 px-8 rounded-lg hover:bg-purple-400/10 transition-colors">
+            <i class="fas fa-arrow-down mr-2"></i>Explore Projects
+          </a>
+        </div>
+      </header>
+    </div>
 
-      <div class="bg-gray-900 rounded-lg p-8 hover:bg-gray-800 transition-colors">
-        <i class="fas fa-rocket text-pink-400 text-3xl mb-4"></i>
-        <h2 class="text-2xl font-bold mb-2">Solar System Render</h2>
-        <p class="text-gray-300 mb-6">A 3D solar system animation created with Blender and Python scripting.</p>
-        <a href="solar-system.html" class="inline-block bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
-          Explore <i class="fas fa-chevron-right ml-2"></i>
-        </a>
+    <!-- Projects Section -->
+    <div id="projects" class="mb-20">
+      <h2 class="text-4xl font-bold mb-12 text-center">
+        <span class="gradient-text">Featured Projects</span>
+      </h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Rotoscoping Project -->
+        <div class="project-card rounded-2xl p-8 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-400/20 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+          <div class="relative z-10">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-xl flex items-center justify-center mr-4">
+                <i class="fas fa-film text-white text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white">Rotoscoping Journey</h3>
+                <p class="text-purple-400">Animation Technique</p>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-6 leading-relaxed">
+              Follow my comprehensive progress from week 3 to week 13, showcasing the evolution of rotoscoping skills 
+              and techniques culminating in a final animated masterpiece.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="bg-purple-400/20 text-purple-300 px-3 py-1 rounded-full text-sm">After Effects</span>
+              <span class="bg-purple-400/20 text-purple-300 px-3 py-1 rounded-full text-sm">Frame Animation</span>
+              <span class="bg-purple-400/20 text-purple-300 px-3 py-1 rounded-full text-sm">Digital Art</span>
+            </div>
+            <a href="rotoscoping.html" class="btn-gradient text-white font-bold py-3 px-6 rounded-lg inline-flex items-center">
+              View Progress <i class="fas fa-chevron-right ml-2"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Solar System Project -->
+        <div class="project-card rounded-2xl p-8 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400/20 to-transparent rounded-full -translate-y-16 translate-x-16"></div>
+          <div class="relative z-10">
+            <div class="flex items-center mb-6">
+              <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-pink-600 rounded-xl flex items-center justify-center mr-4">
+                <i class="fas fa-rocket text-white text-2xl"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-bold text-white">Solar System Render</h3>
+                <p class="text-pink-400">3D Animation</p>
+              </div>
+            </div>
+            <p class="text-gray-300 mb-6 leading-relaxed">
+              A scientifically accurate 3D solar system animation created with Blender and Python scripting, 
+              featuring realistic planetary motion and physics.
+            </p>
+            <div class="flex flex-wrap gap-2 mb-6">
+              <span class="bg-pink-400/20 text-pink-300 px-3 py-1 rounded-full text-sm">Blender</span>
+              <span class="bg-pink-400/20 text-pink-300 px-3 py-1 rounded-full text-sm">Python</span>
+              <span class="bg-pink-400/20 text-pink-300 px-3 py-1 rounded-full text-sm">3D Rendering</span>
+            </div>
+            <a href="solar-system.html" class="bg-gradient-to-r from-pink-600 to-pink-700 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-3 px-6 rounded-lg inline-flex items-center transition-all duration-300 hover:scale-105">
+              Explore <i class="fas fa-chevron-right ml-2"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-lg p-8 mb-16">
-      <h2 class="text-2xl font-bold mb-4">About My Work</h2>
-      <p class="text-gray-300">
-        This portfolio showcases my progress in animation techniques, specifically rotoscoping, over the course of
-        several weeks. It also features my work with Blender and Python to create a solar system animation. Each
-        piece represents my growing skills in digital animation and 3D rendering.
-      </p>
+    <!-- About Section -->
+    <div class="about-section relative rounded-2xl p-12 mb-20">
+      <div class="relative z-10">
+        <h2 class="text-4xl font-bold mb-8 text-center">
+          <span class="gradient-text">About My Work</span>
+        </h2>
+        <div class="max-w-4xl mx-auto">
+          <p class="text-xl text-gray-300 leading-relaxed mb-8 text-center">
+            This portfolio represents my journey through the fascinating world of digital animation and 3D rendering. 
+            Each project showcases different aspects of multimedia creation, from traditional animation techniques 
+            to cutting-edge 3D visualization.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-palette text-white text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Creative Vision</h3>
+              <p class="text-gray-400">Bringing artistic concepts to life through digital media</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-cogs text-white text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Technical Skills</h3>
+              <p class="text-gray-400">Mastering industry-standard tools and techniques</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-chart-line text-white text-xl"></i>
+              </div>
+              <h3 class="text-xl font-bold mb-2">Continuous Growth</h3>
+              <p class="text-gray-400">Evolving skills through practice and experimentation</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center">
+      <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-8">
+        <h2 class="text-3xl font-bold mb-4">Ready to Explore?</h2>
+        <p class="text-lg mb-6 opacity-90">
+          Dive into my creative journey and see how each project builds upon the last.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="rotoscoping.html" class="bg-white text-purple-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors">
+            <i class="fas fa-film mr-2"></i>Start with Rotoscoping
+          </a>
+          <a href="solar-system.html" class="bg-black/30 text-white font-bold py-3 px-6 rounded-lg hover:bg-black/50 transition-colors">
+            <i class="fas fa-rocket mr-2"></i>View Solar System
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="bg-black text-gray-400 border-t border-gray-800">
+  <footer class="bg-black text-gray-400 border-t border-gray-800 mt-20">
     <div class="container mx-auto px-4 py-8">
       <div class="flex flex-col md:flex-row justify-between items-center">
         <div class="mb-4 md:mb-0">
@@ -120,16 +318,16 @@
         </div>
 
         <div class="flex space-x-4">
-            <a href="https://github.com/sharweng" target="_blank" class="hover:text-purple-400 transition-colors">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/sharwinjohnmarbella/" target="_blank" class="hover:text-purple-400 transition-colors">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="mailto:marbellasharwinjohn@gmail.com" class="hover:text-purple-400 transition-colors">
-              <i class="fas fa-envelope"></i>
-            </a>
-          </div>
+          <a href="https://github.com/sharweng" target="_blank" class="hover:text-purple-400 transition-colors">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/sharwinjohnmarbella/" target="_blank" class="hover:text-purple-400 transition-colors">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="mailto:marbellasharwinjohn@gmail.com" class="hover:text-purple-400 transition-colors">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
